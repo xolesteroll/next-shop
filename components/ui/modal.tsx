@@ -7,7 +7,7 @@ interface ModalProps {
     description: string;
     isOpen: boolean;
     onClose: () => void;
-    children?: React.ReactDOM
+    children?: React.ReactNode
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -34,10 +34,10 @@ export const Modal: React.FC<ModalProps> = ({
                         {description}
                     </DialogDescription>
                 </DialogHeader>
+                <div>
+                    {children}
+                </div>
             </DialogContent>
-            <div>
-                {children}
-            </div>
         </Dialog>
     )
 }
