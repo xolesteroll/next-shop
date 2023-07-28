@@ -6,7 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { userStoreModal } from "@/hooks/useStoreModal"
 import { Modal } from "@/components/ui/modal"
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 const formSchema = z.object({
     name: z.string().min(1)
@@ -21,6 +23,7 @@ export const StoreModal = () => {
         }
     })
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        storeModal.onClose()
         console.log(values)
     }
 
@@ -40,13 +43,26 @@ export const StoreModal = () => {
                                 control={form.control}
                                 name="name"
                                 render={({ field }) => (
-                                <FormItem >
-                                    <FormLabel>
-                                        Name
-                                    </FormLabel>
-                                </FormItem>
-                            )}
+                                    <FormItem >
+                                        <FormLabel>
+                                            Name
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="E-Commerce" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
+
+                            <div className="pt-6 space-x-2 flex items-center justify-end">
+                                <Button variant="outline" onClick={storeModal.onClose}>
+                                    Cancel
+                                </Button>
+                                <Button type="submit">
+                                    Continue
+                                </Button>
+                            </div>
                         </form>
                     </Form>
                 </div>
